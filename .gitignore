@@ -1,3 +1,25 @@
+# CAP generierte Ordner (WICHTIG: Die Pipeline baut diese selbst)
 gen/
+_out/
 mta_archives/
+
+# Node.js Abhängigkeiten
 node_modules/
+
+# Datenbanken (lokal)
+*.db
+*.sqlite
+
+# Lokale Konfigurationen & Secrets
+connection.properties
+default-*.json
+.cdsrc-private.json
+.env
+
+# IDE spezifische Dateien (Business Application Studio / VS Code)
+.che/
+.vscode/
+.DS_Store
+
+# Logs
+*.log

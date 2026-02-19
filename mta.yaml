@@ -21,4 +21,4 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
-      plan: lite
+      service-plan: lite
