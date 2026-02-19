@@ -19,7 +19,7 @@ modules:
       builder: custom
       commands:
         - npm install
-        - npx cds build --production
+        - ./node_modules/.bin/cds build --production
       target-path: gen/srv
 
 resources: [] # Keine Datenbank oder XSUAA Ressourcen benötigt
