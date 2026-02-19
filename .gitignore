@@ -5,18 +5,18 @@ _out
 connection.properties
 default-*.json
 .cdsrc-private.json
-#gen/
+gen/
 node_modules/
 target/
 
 # Web IDE, App Studio
 .che/
-#.gen/
+.gen/
 
 # MTA
 *_mta_build_tmp
-#*.mtar
-#mta_archives/
+*.mtar
+mta_archives/
 
 # Other
 .DS_Store
