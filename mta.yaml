@@ -7,7 +7,7 @@ modules:
   # --------------------- SERVER MODULE ------------------------
   - name: simple-deploy-test-srv
     type: nodejs
-    path: gen/srv
+    path: ./                # <--- Geändert: MBT sucht jetzt im Root nach der package.json
     requires:
       - name: simple-deploy-test-db
     provides:
@@ -19,7 +19,7 @@ modules:
       commands:
         - npm install
         - npx cds build --production
-      target-path: gen/srv
+      target-path: gen/srv  # <--- Hier weiß MBT, dass das fertige Zeug in gen/srv liegt
 
 resources:
   # --------------------- DATABASE SERVICE ---------------------
