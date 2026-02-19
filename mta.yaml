@@ -1,6 +1,7 @@
-_schema-version: "3.1"
+_schema-version: '3.1'
 ID: simple-deploy-test
 version: 1.0.0
+
 modules:
   - name: simple-deploy-test-srv
     type: nodejs
@@ -12,3 +13,14 @@ modules:
       - name: srv-api
         properties:
           srv-url: ${default-url}
+    # NEU: Das Modul verlangt jetzt nach dem Logging-Service
+    requires:
+      - name: simple-test-logs
+
+resources:
+  # NEU: Wir definieren einen einfachen Logging-Service
+  - name: simple-test-logs
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      plan: lite
