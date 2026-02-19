@@ -1,16 +1,15 @@
 _schema-version: "3.1"
 ID: simple-deploy-test
-description: A simple CAP project for cTMS testing
+description: A simple CAP service
 version: 1.0.0
 
 modules:
+  # --------------------- SERVER MODULE ------------------------
   - name: simple-deploy-test-srv
     type: nodejs
-    path: .
-    parameters:
-      buildpack: nodejs_buildpack
-      readiness-health-check-type: http
-      readiness-health-check-http-endpoint: /health
+    path: gen/srv
+    requires:
+      - name: simple-deploy-test-db
     provides:
       - name: srv-api
         properties:
@@ -19,7 +18,13 @@ modules:
       builder: custom
       commands:
         - npm install
-        - ./node_modules/.bin/cds build --production
+        - npx cds build --production
       target-path: gen/srv
 
-resources: [] # Keine Datenbank oder XSUAA Ressourcen benötigt
+resources:
+  # --------------------- DATABASE SERVICE ---------------------
+  - name: simple-deploy-test-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
