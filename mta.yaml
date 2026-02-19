@@ -18,8 +18,8 @@ modules:
     build-parameters:
       builder: custom
       commands:
-        - npm install
-        - ./node_modules/.bin/cds build --production
+        - npm install --production
+        - npx @sap/cds-dk build --production
       target-path: gen/srv
 
 resources: [] # Keine Datenbank oder XSUAA Ressourcen benötigt
