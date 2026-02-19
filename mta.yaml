@@ -1,30 +1,23 @@
 _schema-version: "3.1"
 ID: simple-deploy-test
-description: A simple CAP service
-version: 1.0.0
+description: Minimalist CAP service (No DB, No Auth)
+version: 1.0.1
 
 modules:
-  # --------------------- SERVER MODULE ------------------------
   - name: simple-deploy-test-srv
     type: nodejs
-    path: ./                # <--- Geändert: MBT sucht jetzt im Root nach der package.json
-    requires:
-      - name: simple-deploy-test-db
+    path: ./
     provides:
       - name: srv-api
         properties:
           srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+      disk-quota: 512M
     build-parameters:
       builder: custom
       commands:
         - npm install
         - npx cds build --production
-      target-path: gen/srv  # <--- Hier weiß MBT, dass das fertige Zeug in gen/srv liegt
-
-resources:
-  # --------------------- DATABASE SERVICE ---------------------
-  - name: simple-deploy-test-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
+      target-path: gen/srv
