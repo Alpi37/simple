@@ -1,6 +1,6 @@
 _schema-version: "3.1"
 ID: simple-deploy-test
-version: 1.0.7
+version: 1.0.8
 
 build-parameters:
   before-all:
@@ -13,9 +13,22 @@ modules:
   - name: simple-deploy-test-srv
     type: nodejs
     path: gen/srv
+    requires:
+      - name: simple-deploy-test-dest # <--- Das "Futter" für den Content Agent
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
     parameters:
       buildpack: nodejs_buildpack
     build-parameters:
       builder: custom
-      commands: [] # Nichts mehr tun, nur einsammeln
+      commands: [] 
       supported-platforms: [cf]
+
+resources:
+  - name: simple-deploy-test-dest
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
