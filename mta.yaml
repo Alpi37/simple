@@ -1,6 +1,6 @@
 _schema-version: "3.1"
 ID: simple-deploy-test
-version: 1.1.0
+version: 1.1.1
 
 build-parameters:
   before-all:
@@ -14,7 +14,7 @@ modules:
     type: nodejs
     path: gen/srv
     requires:
-      - name: dummy-auth # Referenzname innerhalb der MTA
+      - name: dummy-service # Wir geben ihm, was er will
     provides:
       - name: srv-api
         properties:
@@ -23,7 +23,8 @@ modules:
       buildpack: nodejs_buildpack
 
 resources:
-  - name: dummy-auth
-    type: org.cloudfoundry.existing-service # Erzwingt die Nutzung einer vorhandenen Instanz
+  - name: dummy-service
+    type: org.cloudfoundry.user-provided-service # <--- Das ist der entscheidende Typ
     parameters:
-      service-name: activecontroldestination # Exakter Name aus deinem Screenshot
+      config:
+        dummy: "data" # Minimale Konfiguration, damit der Body nicht leer ist
