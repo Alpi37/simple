@@ -1,6 +1,6 @@
 _schema-version: "3.1"
 ID: simple-deploy-test
-version: 1.0.8
+version: 1.0.9
 
 build-parameters:
   before-all:
@@ -14,7 +14,7 @@ modules:
     type: nodejs
     path: gen/srv
     requires:
-      - name: simple-deploy-test-dest # <--- Das "Futter" für den Content Agent
+      - name: simple-deploy-test-logs # Geändert von dest auf logs
     provides:
       - name: srv-api
         properties:
@@ -27,8 +27,8 @@ modules:
       supported-platforms: [cf]
 
 resources:
-  - name: simple-deploy-test-dest
+  - name: simple-deploy-test-logs
     type: org.cloudfoundry.managed-service
     parameters:
-      service: destination
-      service-plan: lite
+      service: application-logs # Der Service für Cloud Foundry Logs
+      service-plan: lite        # 'lite' ist in fast jedem Account frei verfügbar
